@@ -338,7 +338,8 @@ body {
 
 .card-root {
   border-radius: var(--card-radius);
-  transition: transform 0.35s var(--ease-out-back), box-shadow 0.3s ease, border-color 0.2s ease;
+  contain: paint;
+  isolation: isolate;
 }
 
 @media (max-width: 640px) {
@@ -392,18 +393,14 @@ body {
   object-fit: cover;
   object-position: var(--card-object-position, center);
   filter: saturate(0.95) brightness(0.98);
-  transition: filter 0.3s ease-out, opacity var(--dur-slow) ease;
+  transition: opacity var(--dur-slow) ease;
   z-index: 2;
-  opacity: 1 !important;
+  opacity: 1;
 }
 
 .card-img-wrap.loaded .card-img,
 .card-img-wrap.is-eager .card-img {
   opacity: 1;
-}
-
-.group:hover .card-img {
-  filter: saturate(1.08) brightness(1.02);
 }
 
 .card-video {
@@ -427,7 +424,7 @@ body {
 }
 
 .card-img.card-video-poster {
-  opacity: 1 !important;
+  opacity: 1;
   z-index: 3;
 }
 
@@ -1027,13 +1024,18 @@ body {
 }
 
 .project-poster[data-zoom][role="button"] img[src$="/casanova/logo.png"] {
-  border-radius: 15%;
-  transform: scale(1.03);
+  border-radius: 0;
+  transform: none;
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 .project-lightbox .project-lightbox-image[src$="/casanova/logo.png"] {
-  border-radius: 15%;
-  transform: scale(1.03);
+  border-radius: 0;
+  transform: none;
+  max-width: calc(100% - 2rem);
+  max-height: calc(100svh - 12rem);
 }
 
 .project-lightbox {
@@ -1177,3 +1179,6 @@ body {
 @media(hover:hover)and (pointer:fine){.project-body a[href^=http]:hover:after,.bio-copy a[href^=http]:hover:after{opacity:0;animation:social-icon-swap-blur .19s var(--ease-out-sharp);transform:translate(.1em,calc(.1em - 50%))scale(.74)}
 .project-body a[href^=http]:hover:before,.bio-copy a[href^=http]:hover:before{opacity:1;animation:social-icon-swap-blur .19s var(--ease-out-sharp);transform:translateY(calc(-50% - .04em))scale(1)}
 }
+.project-body .project-img.casanova-image{object-fit:contain;background:#000}
+.project-poster:has(img[src$="/casanova/logo.png"]) .blur-img-wrap{aspect-ratio:4 / 3;background:#000}
+.project-poster:has(img[src$="/casanova/logo.png"]) .blur-img{object-fit:contain;transform:none}

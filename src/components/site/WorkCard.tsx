@@ -17,21 +17,24 @@ export function WorkCard({ card, entryIndex }: WorkCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isHoveredRef = useRef(false);
   const startTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const frameRequestRef = useRef<number | null>(null);
 
   useEffect(() => {
+    const video = videoRef.current;
     return () => {
       if (startTimeoutRef.current) clearTimeout(startTimeoutRef.current);
+      if (frameRequestRef.current !== null) video?.cancelVideoFrameCallback?.(frameRequestRef.current);
     };
-  }, []);
+  }, [shouldLoadVideo]);
 
   useEffect(() => {
     if (shouldLoadVideo && startsOnLoad && videoRef.current) {
       const video = videoRef.current;
       if (keepsLooping) {
-        video.play().then(() => setIsPlaying(true)).catch(() => {});
+        video.play().catch(() => {});
       } else {
         startTimeoutRef.current = setTimeout(() => {
-          video.play().then(() => setIsPlaying(true)).catch(() => {});
+          video.play().catch(() => {});
         }, entryIndex * 800);
       }
     }
@@ -46,16 +49,21 @@ export function WorkCard({ card, entryIndex }: WorkCardProps) {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-        setShouldLoadVideo(true);
-        observer.disconnect();
+        if (entry.isIntersecting) setShouldLoadVideo(true);
+        if (keepsLooping && videoRef.current) {
+          if (entry.isIntersecting) {
+            videoRef.current.play().catch(() => {});
+          } else {
+            videoRef.current.pause();
+          }
+        }
       },
       { threshold: 0.1 }
     );
 
     observer.observe(element);
     return () => observer.disconnect();
-  }, [card.videoMp4, card.videoWebm]);
+  }, [card.videoMp4, card.videoWebm, keepsLooping]);
 
   useEffect(() => {
     const isDesktop = window.matchMedia("(min-width: 768px)").matches;
@@ -86,8 +94,10 @@ export function WorkCard({ card, entryIndex }: WorkCardProps) {
       const video = videoRef.current;
       // Let the first playback finish, then replay from the held final frame.
       if (startsOnLoad && !video.ended) return;
+      if (frameRequestRef.current !== null) video.cancelVideoFrameCallback?.(frameRequestRef.current);
+      setIsPlaying(false);
       video.currentTime = 0;
-      video.play().then(() => setIsPlaying(true)).catch(() => {});
+      video.play().catch(() => {});
     }
   };
 
@@ -105,6 +115,20 @@ export function WorkCard({ card, entryIndex }: WorkCardProps) {
     video.pause();
     // Keep the video's final frame visible until the next hover.
     setIsPlaying(true);
+  };
+
+  const handleVideoPlaying = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (frameRequestRef.current !== null) video.cancelVideoFrameCallback?.(frameRequestRef.current);
+    if (video.requestVideoFrameCallback) {
+      frameRequestRef.current = video.requestVideoFrameCallback(() => {
+        frameRequestRef.current = null;
+        setIsPlaying(true);
+      });
+    } else {
+      setIsPlaying(true);
+    }
   };
 
   // Prepend / if needed
@@ -130,7 +154,7 @@ export function WorkCard({ card, entryIndex }: WorkCardProps) {
         href={card.href}
         target={card.isExternal ? "_blank" : undefined}
         rel={card.isExternal ? "noopener noreferrer" : undefined}
-        className="card-root group relative block overflow-hidden border border-[var(--c-border)] dark:border-[var(--c-dark-border)] bg-[var(--c-bg)] dark:bg-[var(--c-dark-bg)] shadow-sm hover:shadow-md"
+        className="card-root group relative block overflow-hidden border border-[var(--c-border)] dark:border-[var(--c-dark-border)] bg-[var(--c-bg)] dark:bg-[var(--c-dark-bg)] shadow-sm"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
@@ -158,6 +182,7 @@ export function WorkCard({ card, entryIndex }: WorkCardProps) {
               loop={!startsOnLoad || keepsLooping}
               playsInline
               preload="metadata"
+              onPlaying={handleVideoPlaying}
               onEnded={handleVideoEnded}
               className="card-video"
             >
