@@ -2,8 +2,18 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Giovanni De Gattis · Designer for digital products & systems",
-  description: "Giovanni De Gattis is a communication designer working across visual identity, digital products and systems.",
+  title: "Giovanni De Gattis - Designer for digital products & systems",
+  description: "Selected work across visual identity, digital products and creative technology.",
+  openGraph: {
+    title: "Giovanni De Gattis - Designer for digital products & systems",
+    description: "Selected work across visual identity, digital products and creative technology.",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Giovanni De Gattis - Designer for digital products & systems",
+    description: "Selected work across visual identity, digital products and creative technology.",
+  },
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },

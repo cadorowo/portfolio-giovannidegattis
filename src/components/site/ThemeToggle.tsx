@@ -1,13 +1,18 @@
 "use client";
 
 import React, { useSyncExternalStore, useRef } from "react";
+import { usePathname } from "next/navigation";
 
 function subscribe(callback: () => void) {
   window.addEventListener("storage", callback);
+  window.addEventListener("pageshow", callback);
+  window.addEventListener("popstate", callback);
   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
   mediaQuery.addEventListener("change", callback);
   return () => {
     window.removeEventListener("storage", callback);
+    window.removeEventListener("pageshow", callback);
+    window.removeEventListener("popstate", callback);
     mediaQuery.removeEventListener("change", callback);
   };
 }
@@ -23,11 +28,53 @@ function getServerSnapshot() {
   return false;
 }
 
+let previewPlayedForDocument = false;
+
 export function ThemeToggle() {
+  const pathname = usePathname();
   const isDark = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const previewTimerRef = useRef<number | null>(null);
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem("theme");
+    const dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle("dark", dark);
+    window.dispatchEvent(new Event("storage"));
+  }, [pathname]);
+
+  React.useEffect(() => {
+    if (pathname !== "/") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (previewPlayedForDocument) return;
+
+    const button = buttonRef.current;
+    if (!button) return;
+
+    const finishPreview = (event: AnimationEvent) => {
+      if (event.animationName === "theme-preview-thumb") {
+        button.classList.remove("is-previewing");
+      }
+    };
+    button.addEventListener("animationend", finishPreview);
+    previewTimerRef.current = window.setTimeout(() => {
+      previewPlayedForDocument = true;
+      button.classList.add("is-previewing");
+      previewTimerRef.current = null;
+    }, 1100);
+
+    return () => {
+      if (previewTimerRef.current !== null) window.clearTimeout(previewTimerRef.current);
+      button.classList.remove("is-previewing");
+      button.removeEventListener("animationend", finishPreview);
+    };
+  }, [pathname]);
 
   const toggleTheme = () => {
+    if (previewTimerRef.current !== null) window.clearTimeout(previewTimerRef.current);
+    previewTimerRef.current = null;
+    buttonRef.current?.classList.remove("is-previewing");
+    if (pathname === "/") previewPlayedForDocument = true;
     const nextDark = !isDark;
     const newTheme = nextDark ? "dark" : "light";
 

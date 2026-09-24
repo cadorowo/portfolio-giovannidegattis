@@ -75,11 +75,13 @@ export function IntroSection() {
         >
           Politecnico di Torino
         </a>
-        .
+        <br />
       </p>
 
       <p className="bio-copy text-base text-[var(--c-muted)] dark:text-[var(--c-dark-muted)] mt-4 leading-relaxed">
-        I build identities, digital products and visual systems — from concept to the infrastructure behind them. This portfolio focuses on design work; for code, video workflows and technical experiments, explore my {" "}
+        I build identities, digital products and visual systems - from concept to the infrastructure behind them.
+        <br />
+        This portfolio focuses on design work; for code, video workflows and technical experiments, explore my{" "}
         <a
           href="https://github.com/cadorowo"
           target="_blank"

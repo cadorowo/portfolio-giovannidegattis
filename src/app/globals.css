@@ -257,6 +257,44 @@ body {
   transform: translateY(-50%) scale(0.4) rotate(-30deg);
 }
 
+/* A hint on each page load that moves and recolors only the control. */
+#theme-toggle {
+  --preview-start: 0px;
+  --preview-peak: 18px;
+  --preview-color: #376b56;
+  --preview-border: transparent;
+}
+
+.dark #theme-toggle {
+  --preview-start: 24px;
+  --preview-peak: 6px;
+  --preview-color: #f1f4f5;
+  --preview-border: var(--c-dark-border);
+}
+
+#theme-toggle.is-previewing .toggle-thumb {
+  animation: theme-preview-thumb 1600ms var(--ease-out-sharp);
+}
+
+#theme-toggle.is-previewing .toggle-track {
+  animation: theme-preview-track 1600ms ease-in-out;
+}
+
+@keyframes theme-preview-thumb {
+  0%, 100% { transform: translateX(var(--preview-start)); background: var(--c-accent); }
+  48% { transform: translateX(var(--preview-peak)); background: var(--preview-color); }
+}
+
+@keyframes theme-preview-track {
+  0%, 100% { border-color: var(--preview-border); background: transparent; }
+  48% { border-color: var(--c-accent); background: color-mix(in srgb, var(--c-accent) 10%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #theme-toggle.is-previewing .toggle-thumb,
+  #theme-toggle.is-previewing .toggle-track { animation: none; }
+}
+
 /* Feed Filter & Sliding Indicator */
 .feed-filter-underline {
   position: absolute;
@@ -620,8 +658,9 @@ body {
   background: linear-gradient(
     to bottom,
     #376b56 0%,
-    #39715a 32%,
-    var(--c-page-bg) 75%
+    #28513f 28%,
+    #07110c 58%,
+    #000 78%
   );
 }
 
@@ -633,6 +672,10 @@ body {
   opacity: 0.55;
   pointer-events: none;
   content: "";
+}
+
+.dark .site-footer::before {
+  mask-image: linear-gradient(to bottom, #000 0%, #000 36%, transparent 78%);
 }
 
 .site-footer-content {
@@ -697,8 +740,8 @@ body {
   transform: translateX(-50%);
 }
 
-.dark .site-footer-mark {
-  color: white;
+html.dark .site-footer .site-footer-mark {
+  color: #000 !important;
 }
 
 @media (max-width: 639px) {
@@ -1023,6 +1066,10 @@ body {
   background: transparent;
 }
 
+.dark .project-poster:has(img[src*="/casanova/"]) .blur-img-wrap {
+  background: #000;
+}
+
 .project-poster[data-zoom][role="button"] img[src$="/casanova/logo.png"] {
   border-radius: 0;
   transform: none;
@@ -1180,5 +1227,9 @@ body {
 .project-body a[href^=http]:hover:before,.bio-copy a[href^=http]:hover:before{opacity:1;animation:social-icon-swap-blur .19s var(--ease-out-sharp);transform:translateY(calc(-50% - .04em))scale(1)}
 }
 .project-body .project-img.casanova-image{object-fit:contain;background:#000}
-.project-poster:has(img[src$="/casanova/logo.png"]) .blur-img-wrap{aspect-ratio:4 / 3;background:#000}
-.project-poster:has(img[src$="/casanova/logo.png"]) .blur-img{object-fit:contain;transform:none}
+.project-poster:has(img[src*="/casanova/"]) .blur-img-wrap{aspect-ratio:4 / 3}
+.project-poster:has(img[src*="/casanova/"]) .blur-img{object-fit:contain;transform:none}
+.project-body .tracce-media{margin-block:1.25rem}
+.project-body .tracce-image{object-fit:contain;background:#000}
+.project-body .tracce-video-wrap{background:#000}
+.project-body .project-video.tracce-video{object-fit:contain;background:#000}
