@@ -57,7 +57,7 @@ export function IntroSection() {
             Hi, I&apos;m Giovanni De Gattis
           </h1>
           <span className="text-base leading-snug text-[var(--c-muted)] dark:text-[var(--c-dark-muted)]">
-            Designer working across visual identity, digital products &amp; systems
+            Designing visual identities and digital products, building the systems behind them
           </span>
         </div>
         <div>
@@ -79,7 +79,7 @@ export function IntroSection() {
       </p>
 
       <p className="bio-copy text-base text-[var(--c-muted)] dark:text-[var(--c-dark-muted)] mt-4 leading-relaxed">
-        I build identities, digital products and visual systems from concept to the infrastructure behind them.
+        I create visual identities and digital products, then build the systems that bring them to life.
         <br />
         This portfolio focuses on design work; for code, video workflows and technical experiments, explore my{" "}
         <a

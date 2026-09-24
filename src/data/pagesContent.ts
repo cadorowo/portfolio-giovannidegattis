@@ -23,14 +23,14 @@ export interface PageDetail {
 
 export const ABOUT_DATA: PageDetail = {
   "title": "About Giovanni De Gattis",
-  "description": "Communication designer working across visual identity, digital products and systems.",
+  "description": "Designing visual identities and digital products, building the systems behind them.",
   actionLinks: [
     { label: "GitHub", href: "https://github.com/cadorowo", type: "default" },
   ],
   "bodyHtml": `<div class="reading-meta"><span>Turin, Italy</span></div>
 <div class="project-title-block">
   <h1 class="text-base font-display font-medium leading-snug"><span class="text-[var(--c-text)] dark:text-[var(--c-dark-text)]">Giovanni De Gattis</span></h1>
-  <p class="text-base leading-[1.7] text-[var(--c-muted)] dark:text-[var(--c-dark-muted)]">Communication designer · visual identity, digital products &amp; systems</p>
+  <p class="text-base leading-[1.7] text-[var(--c-muted)] dark:text-[var(--c-dark-muted)]">Designing visual identities and digital products, building the systems behind them</p>
 </div>
 <div data-zoom aria-label="Open photo of Giovanni fullscreen" class="project-poster rounded-[2rem] overflow-hidden" style="corner-shape: squircle">
   <div class="blur-img-wrap" style="aspect-ratio: 4 / 3">
