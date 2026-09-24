@@ -25,6 +25,8 @@ export const ABOUT_DATA: PageDetail = {
   "title": "About Giovanni De Gattis",
   "description": "Designing visual identities and digital products, building the systems behind them.",
   actionLinks: [
+    { label: "CV", href: "/Giovanni_De_Gattis_CV.pdf", type: "default" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/giovanni-de-gattis", type: "default" },
     { label: "GitHub", href: "https://github.com/cadorowo", type: "default" },
   ],
   "bodyHtml": `<div class="reading-meta"><span>Turin, Italy</span></div>
@@ -40,7 +42,7 @@ export const ABOUT_DATA: PageDetail = {
 <article class="project-body">
   <p>I'm studying Communication Design at <a href="https://www.polito.it" target="_blank" rel="noopener noreferrer" class="inline-link">Politecnico di Torino</a>. My background in computer science made me curious about the systems behind the things we use.</p>
   <p>I work where visual thinking and technical problem-solving meet: building identities, digital products and workflows that are clear, useful and made to work in the real world.</p>
-  <p>Most of this portfolio focuses on design work. For code, video workflows and technical experiments, you can explore my <a href="https://github.com/cadorowo" target="_blank" rel="noopener noreferrer" class="inline-link">GitHub</a>.</p>
+  <p>Most of this portfolio focuses on design work. For a broader overview of my experience, you can read my <a href="/Giovanni_De_Gattis_CV.pdf" target="_blank" rel="noopener noreferrer" class="inline-link">CV</a>. For code, video workflows and technical experiments, explore my <a href="https://github.com/cadorowo" target="_blank" rel="noopener noreferrer" class="inline-link">GitHub</a>.</p>
 </article>
 <nav class="back-to-top-wrap" aria-label="Back to top"><a href="#" class="back-to-top" data-back-to-top><span class="back-to-top-label">Back to top</span></a></nav>`
 };

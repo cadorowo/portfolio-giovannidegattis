@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ArrowUp, Mail } from "lucide-react";
+import { ArrowUp, Mail, FileText } from "lucide-react";
 
 export function FooterSection() {
   const scrollToTop = (e: React.MouseEvent) => {
@@ -20,6 +20,17 @@ export function FooterSection() {
       <footer className="site-footer">
         <div className="site-footer-content">
           <ul className="site-footer-socials">
+            <li>
+              <a
+                href="/Giovanni_De_Gattis_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-text-link"
+              >
+                <FileText aria-hidden="true" size={18} strokeWidth={1.8} />
+                CV
+              </a>
+            </li>
             <li>
               <a
                 href="https://www.linkedin.com/in/giovanni-de-gattis/"
