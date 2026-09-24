@@ -1,0 +1,30 @@
+import { CardItem } from "@/types/portfolio";
+
+export const PORTFOLIO_CARDS: CardItem[] = [
+  {
+    id: "casanova",
+    type: "project",
+    category: ["design", "systems"],
+    inAll: true,
+    href: "/projects/casanova",
+    isExternal: false,
+    title: "Casanova",
+    tag: "Real-time product & full-stack platform",
+    year: "2026",
+    videoMp4: "/images/projects/casanova/card-stamp.mp4",
+    autoPlayVideo: true,
+    imgSrc: "/images/projects/casanova/card-poster.jpg",
+    imgAlt: "Casanova",
+    aspectRatio: "4/3",
+  },
+  { id: "chalet-grande-cerise", type: "project", category: ["design", "systems"], inAll: true, href: "/projects/chalet-grande-cerise", isExternal: false, title: "Chalet Grande Cerise", tag: "Hospitality", year: "2025", videoMp4: "/images/projects/chalet-grande-cerise/card-wax-apply.mp4", autoPlayVideo: true, imgSrc: "/images/projects/chalet-grande-cerise/card-poster.jpg", imgAlt: "Chalet Grande Cerise", aspectRatio: "4/3" },
+  { id: "vda-case-vacanze", type: "project", category: ["design", "systems"], inAll: true, href: "/projects/vda-case-vacanze", isExternal: false, title: "VDA Case Vacanze", tag: "Brand Identity", year: "2025", imgSrc: "/images/projects/vda-case-vacanze/thumb-netway-gray.webp", imgAlt: "VDA Case Vacanze", aspectRatio: "4/3" },
+  { id: "polito-sailing-team", type: "project", category: "design", inAll: true, href: "/projects/polito-sailing-team", isExternal: false, title: "PoliTO Sailing Team", tag: "Brand Identity", year: "2023-2024", imgSrc: "/images/projects/polito-sailing-team/06_boat_render-netway-gray.webp", imgAlt: "PoliTO Sailing Team", aspectRatio: "4/3" },
+  { id: "netway", type: "project", category: "design", inAll: true, href: "/projects/netway", isExternal: false, title: "Netway", tag: "Brand Identity", year: "2025", videoMp4: "/images/projects/netway/card-bus.mp4", autoPlayVideo: true, imgSrc: "/images/projects/netway/card-poster.jpg", imgAlt: "Netway", aspectRatio: "16/9" },
+  { id: "away", type: "project", category: ["design", "systems"], inAll: true, href: "/projects/away", isExternal: false, title: "Away", tag: "Service Design", year: "2026", videoMp4: "/images/projects/away/card-keychain-netway-gray.mp4", autoPlayVideo: true, imgSrc: "/images/projects/away/card-poster-netway-gray.webp", imgAlt: "Away", aspectRatio: "16/9" },
+  { id: "tracce-magazine", type: "project", category: "design", inAll: true, href: "/projects/tracce-magazine", isExternal: false, title: "Tracce Magazine", tag: "Editorial Design", year: "2025", imgSrc: "/images/projects/tracce-magazine/cover-netway-gray.webp", imgAlt: "Tracce Magazine", aspectRatio: "3/4" },
+  { id: "antonella-sirianni", type: "project", category: "design", inAll: true, href: "/projects/antonella-sirianni", isExternal: false, title: "Antonella Sirianni", tag: "Brand Identity", year: "2026", videoMp4: "/images/projects/antonella-sirianni/card-keys-netway-gray-global.mp4", autoPlayVideo: true, imgSrc: "/images/projects/antonella-sirianni/card-poster-netway-gray-global.webp", imgAlt: "Antonella Sirianni", aspectRatio: "1/1" },
+  { id: "been-on", type: "project", category: "design", inAll: true, href: "/projects/been-on", isExternal: false, title: "been ON", tag: "Creative Direction", year: "2025-Present", videoMp4: "/images/projects/been-on/card-pingpong.mp4", autoPlayVideo: true, imgSrc: "/images/projects/been-on/card-poster.jpg", imgAlt: "been ON", aspectRatio: "4/3" },
+  { id: "milano-finest", type: "project", category: "design", inAll: true, href: "/projects/milano-finest", isExternal: false, title: "Milano Finest", tag: "Event Communication", year: "2026", videoMp4: "/images/projects/milano-finest/card-circle-date-netway-gray-global.mp4", autoPlayVideo: true, imgSrc: "/images/projects/milano-finest/card-poster-netway-gray-global.webp", imgAlt: "Milano Finest", aspectRatio: "4/3" },
+  { id: "vivaldi-calendario", type: "project", category: "design", inAll: true, href: "/projects/vivaldi-calendario", isExternal: false, title: "Vivaldi Calendario", tag: "Product Design", year: "2023", imgSrc: "/images/projects/vivaldi-calendario/thumb-netway-gray.webp", imgAlt: "Vivaldi Calendario", aspectRatio: "4/3" },
+];
